@@ -60,25 +60,25 @@ const ForceGraph = () => {
           const networksUsed = userHubDaos.filter(x => {
             return x.data.length > 0;
           });
-          // // for each network with values
-          // const list = networksUsed.map(x => {
-          //   // get each DAO object
-          //   return x.data.map(y => {
-          //     return {
-          //       id: y.meta.name.concat(` (${x.apiMatch})`),
-          //       group: getGroup(x.apiMatch),
-          //       size: '10',
-          //       network: x.name,
-          //       graphEndpoint: x.endpoint,
-          //     };
-          //   });
-          // });
-          //
+          // for each network with values
           const list = networksUsed.map(x => {
+            // get each DAO object
             return x.data.map(y => {
-              return y;
+              return {
+                id: y.meta.name.concat(` (${x.apiMatch})`),
+                group: getGroup(x.apiMatch),
+                size: '10',
+                network: x.name,
+                graphEndpoint: x.endpoint,
+              };
             });
           });
+
+          // const list = networksUsed.map(x => {
+          //   return x.data.map(y => {
+          //     return y;
+          //   });
+          // });
           if (list) {
             // list comes nested on each network
             const flatten = list.flat();
