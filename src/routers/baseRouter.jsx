@@ -10,6 +10,7 @@ import HubBalances from '../pages/HubBalances';
 import Register from '../pages/Register';
 import Summon from '../pages/Summon';
 import SummonPartyFavor from '../pages/SummonPartyFavor';
+import TreeGraph from '../pages/3dForceGraph';
 
 const BaseRouter = () => {
   return (
@@ -22,6 +23,9 @@ const BaseRouter = () => {
       </Route>
       <Route exact path='/'>
         <Hub />
+      </Route>
+      <Route exact path='/3d'>
+        <TreeGraph />
       </Route>
       <Route exact path='/explore'>
         <ExploreContextProvider>
