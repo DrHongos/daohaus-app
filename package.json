@@ -47,6 +47,7 @@
     "react-vis": "^1.11.7",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
+    "three": "^0.137.5",
     "uuid": "^8.3.2",
     "web-vitals": "^0.2.4",
     "web3": "^1.6.1",
