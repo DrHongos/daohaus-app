@@ -287,12 +287,15 @@ const ForceGraph = () => {
         return;
       } else if (type === 'RG') {
         // follow RG History through all seasons!
+        // limited to xdai DAOs
         const daosList = {
           rg: '0xfe1084bc16427e5eb7f13fc19bcd4e641f7d571f', // RG
           s0: '0x515e6d357374a532ead74adbcda02bf6b3c083a9', // RG S0
           s1: '0x10e31c10fb4912bc408ce6c585074bd8693f2158', // RG S1
           s2: '0xd83ac7d30495e1e1d2f42a0d796a058089719a45', // RG S2
           s3: '0x7bde8f8a3d59b42d0d8fab3a46e9f42e8e3c2de8', // RG S3
+          daoHausWarcamp: '0xef3d8c4fbb1860fceab16595db7e650cd5ad51c1',
+          metaCartel: '0xb152b115c94275b54a3f0b08c1aa1d21f32a659a',
         };
         // last promise to resolve will prevail..
         const totalPromises = [];
@@ -339,7 +342,8 @@ const ForceGraph = () => {
 
   const handleSearch = search => {
     if (search.target.value.length >= 3) {
-      const dataRendered = graph.current.graphData();
+      const dataRendered = graph.current.graphData(); // failing!
+      console.log('data rendered:', dataRendered);
       if (dataRendered.nodes.length) {
         const results = dataRendered.nodes.filter(node =>
           node.id.toLowerCase().startsWith(search.target.value.toLowerCase()),
