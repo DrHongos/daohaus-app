@@ -427,6 +427,20 @@ const gatherArgs = async data => {
         }
         return [...vals].flatMap(v => v);
       }
+      if (arg.type === 'toArray') {
+        const vals = await Promise.all(
+          arg.gatherArgs.map(async a => {
+            return gatherArgs({
+              ...data,
+              tx: { ...tx, gatherArgs: [a] },
+            });
+          }),
+        );
+        const items = vals.toString().split(',');
+        const corrected = items.map(x => parseInt(x));
+        console.log(`passes ${corrected}`);
+        return corrected;
+      }
       //  for convenience, will search the values object for a field with the given string.
       return arg;
     }),

@@ -66,6 +66,7 @@ export const supportedChains = {
     moloch_token_factory: '0x94b68149aA9603eeF3fD31A63f6d52AdB4f978D9',
     hedgey_nft_addr: '0x2aa5d15eb36e5960d056e8fea6e7bb3e2a06a351',
     hedgey_batch_mint_addr: '0xB3d4EFE7ECF102afCd3262cF4d5fc768D0c55459',
+    conditional_tokens_addr: '0xC59b0e4De5F1248C1140964E0fF287B192407E0C',
     zodiac_amb_module: {
       amb_bridge_address: {
         '0x64': '0x75Df5AF045d91108662D8080fD1FEFAd6aA0bb59',
@@ -153,6 +154,7 @@ export const supportedChains = {
     moloch_token_factory: '0x12d1a14c06c3b75e541ec7e30a87e13beeda2965',
     hedgey_nft_addr: '0x4bc8ea84bdc3ebb01d495e5d1605d4f082aeb5d7',
     hedgey_batch_mint_addr: '0x0ad2501f3CD2016EDC0e4D9d0E6e31ee34b0C9Af',
+    conditional_tokens_addr: '0x36bede640D19981A82090519bC1626249984c908',
     zodiac_amb_module: {
       amb_bridge_address: {
         '0x64': '0xc38D4991c951fE8BCE1a12bEef2046eF36b0FA4A',
@@ -388,6 +390,7 @@ export const supportedChains = {
     hedgey_nft_addr: '0x2aa5d15eb36e5960d056e8fea6e7bb3e2a06a351',
     hedgey_batch_mint_addr: '0x4Bc8Ea84bdC3EBB01D495e5D1605d4F082aEb5d7',
     dao_conditional_helper_addr: '0x55c8F8a71aD01FC707Bbb1A04d2c0Ef246973392',
+    conditional_tokens_addr: '0xCeAfDD6bc0bEF976fdCd1112955828E00543c0Ce',
     zodiac_amb_module: {
       amb_bridge_address: {
         '0x1': '0x4C36d2919e407f0Cc2Ee3c993ccF8ac26d9CE64e',

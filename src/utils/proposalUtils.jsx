@@ -61,6 +61,9 @@ export const PROPOSAL_TYPES = {
   POSTER_UPDATE_LOCATION: 'change location of DAO DOC',
   SBT_SUMMON: 'Summon SBT',
   HEDGEY_CONTRIBUTOR_REWARDS: 'Hedgey Contributor Rewards',
+  CREATE_CONDITION: 'Create conditional tokens',
+  SPLIT_POSITION: 'Fund and mint conditional tokens',
+  REPORT_PAYOUTS: 'Report results of a condition',
 };
 
 export const MINION_TYPES = {

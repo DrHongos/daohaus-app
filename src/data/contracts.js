@@ -219,4 +219,9 @@ export const CONTRACTS = {
     abiName: 'HEDGEY_BATCH_MINT',
     contractAddress: '.contextData.chainConfig.hedgey_batch_mint_addr',
   },
+  CONDITIONAL_TOKENS: {
+    location: 'local',
+    abiName: 'CONDITIONAL_TOKENS',
+    contractAddress: '.contextData.chainConfig.conditional_tokens_addr',
+  },
 };

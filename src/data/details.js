@@ -150,4 +150,8 @@ export const DETAILS = {
     minionType: MINION_TYPES.SAFE,
     token: '.values.tokenAddress',
   },
+  CONDITIONAL: {
+    title: 'Conditional tokens',
+    proposalType: '.formData.type',
+  },
 };

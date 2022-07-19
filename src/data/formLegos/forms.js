@@ -21,7 +21,7 @@ import { VANILLA_MINION_FORMS } from './vanillaMinionForms';
 import { POSTER_FORMS } from './posterForms';
 // import { SBT_FORMS } from './sbtForms';
 import { HEDGEY_FORMS } from './hedgeyForms';
-
+import { CONDITIONAL_TOKENS_FORMS } from './conditionalTokensForm';
 // TEST LEGOS BEFORE PUSHING TO DEVELOP
 
 // Step 1. Uncomment
@@ -63,4 +63,5 @@ export const FORM = {
   ...SWAPR_BOOST_FORMS,
   ...POSTER_FORMS,
   ...HEDGEY_FORMS,
+  ...CONDITIONAL_TOKENS_FORMS,
 };

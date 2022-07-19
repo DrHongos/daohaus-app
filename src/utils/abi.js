@@ -44,6 +44,7 @@ import NATIVE_WRAPPER from '../contracts/nativeWrapper.json';
 import MOLOCH_TOKEN_FACTORY from '../contracts/molochTokenFactory.json';
 import SBT_FACTORY from '../contracts/sbtFactory.json';
 import HEDGEY_BATCH_MINT from '../contracts/hedgeyBatchMint.json';
+import CONDITIONAL_TOKENS from '../contracts/conditionalToken.json';
 import { validate } from './validation';
 
 import { cacheABI, getCachedABI } from './localForage';
@@ -84,6 +85,7 @@ export const LOCAL_ABI = Object.freeze({
   MOLOCH_TOKEN_FACTORY,
   SBT_FACTORY,
   HEDGEY_BATCH_MINT,
+  CONDITIONAL_TOKENS,
 });
 
 const getBlockExplorerApiKey = chainID => {

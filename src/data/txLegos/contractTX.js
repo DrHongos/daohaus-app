@@ -22,7 +22,7 @@ import { POSTER_BOOST_TX } from './posterBoostTX';
 import { MOLOCH_TOKEN_FACTORY_TX } from './molochTokenTX';
 // import { SBT_TX } from './sbtTX';
 import { HEDGEY_CONTRIBUTOR_REWARDS_BOOST_TX } from './hedgeyContributorRewardsBoostTX';
-
+import { CONDITIONAL_TOKENS_TX } from './conditionalTokensTX';
 // TEST LEGOS BEFORE PUSHING TO DEVELOP
 
 // const TX_REQUIRED = ['name', 'contract', 'errMsg', 'successMsg'];
@@ -67,4 +67,5 @@ export const TX = {
   ...POSTER_BOOST_TX,
   ...MOLOCH_TOKEN_FACTORY_TX,
   ...HEDGEY_CONTRIBUTOR_REWARDS_BOOST_TX,
+  ...CONDITIONAL_TOKENS_TX,
 };

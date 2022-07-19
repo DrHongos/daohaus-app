@@ -1,0 +1,705 @@
+[
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "payable": false,
+        "outputs": [
+            {
+                "type": "uint256",
+                "name": ""
+            }
+        ],
+        "name": "balanceOf",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "owner"
+            },
+            {
+                "type": "uint256",
+                "name": "id"
+            }
+        ],
+        "constant": true
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "payable": false,
+        "outputs": [],
+        "name": "redeemPositions",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "collateralToken"
+            },
+            {
+                "type": "bytes32",
+                "name": "parentCollectionId"
+            },
+            {
+                "type": "bytes32",
+                "name": "conditionId"
+            },
+            {
+                "type": "uint256[]",
+                "name": "indexSets"
+            }
+        ],
+        "constant": false
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "payable": false,
+        "outputs": [
+            {
+                "type": "bool",
+                "name": ""
+            }
+        ],
+        "name": "supportsInterface",
+        "inputs": [
+            {
+                "type": "bytes4",
+                "name": "interfaceId"
+            }
+        ],
+        "constant": true
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "payable": false,
+        "outputs": [
+            {
+                "type": "uint256",
+                "name": ""
+            }
+        ],
+        "name": "payoutNumerators",
+        "inputs": [
+            {
+                "type": "bytes32",
+                "name": ""
+            },
+            {
+                "type": "uint256",
+                "name": ""
+            }
+        ],
+        "constant": true
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "payable": false,
+        "outputs": [],
+        "name": "safeBatchTransferFrom",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "from"
+            },
+            {
+                "type": "address",
+                "name": "to"
+            },
+            {
+                "type": "uint256[]",
+                "name": "ids"
+            },
+            {
+                "type": "uint256[]",
+                "name": "values"
+            },
+            {
+                "type": "bytes",
+                "name": "data"
+            }
+        ],
+        "constant": false
+    },
+    {
+        "type": "function",
+        "stateMutability": "pure",
+        "payable": false,
+        "outputs": [
+            {
+                "type": "uint256",
+                "name": ""
+            }
+        ],
+        "name": "getPositionId",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "collateralToken"
+            },
+            {
+                "type": "bytes32",
+                "name": "collectionId"
+            }
+        ],
+        "constant": true
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "payable": false,
+        "outputs": [
+            {
+                "type": "uint256[]",
+                "name": ""
+            }
+        ],
+        "name": "balanceOfBatch",
+        "inputs": [
+            {
+                "type": "address[]",
+                "name": "owners"
+            },
+            {
+                "type": "uint256[]",
+                "name": "ids"
+            }
+        ],
+        "constant": true
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "payable": false,
+        "outputs": [],
+        "name": "splitPosition",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "collateralToken"
+            },
+            {
+                "type": "bytes32",
+                "name": "parentCollectionId"
+            },
+            {
+                "type": "bytes32",
+                "name": "conditionId"
+            },
+            {
+                "type": "uint256[]",
+                "name": "partition"
+            },
+            {
+                "type": "uint256",
+                "name": "amount"
+            }
+        ],
+        "constant": false
+    },
+    {
+        "type": "function",
+        "stateMutability": "pure",
+        "payable": false,
+        "outputs": [
+            {
+                "type": "bytes32",
+                "name": ""
+            }
+        ],
+        "name": "getConditionId",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "oracle"
+            },
+            {
+                "type": "bytes32",
+                "name": "questionId"
+            },
+            {
+                "type": "uint256",
+                "name": "outcomeSlotCount"
+            }
+        ],
+        "constant": true
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "payable": false,
+        "outputs": [
+            {
+                "type": "bytes32",
+                "name": ""
+            }
+        ],
+        "name": "getCollectionId",
+        "inputs": [
+            {
+                "type": "bytes32",
+                "name": "parentCollectionId"
+            },
+            {
+                "type": "bytes32",
+                "name": "conditionId"
+            },
+            {
+                "type": "uint256",
+                "name": "indexSet"
+            }
+        ],
+        "constant": true
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "payable": false,
+        "outputs": [],
+        "name": "mergePositions",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "collateralToken"
+            },
+            {
+                "type": "bytes32",
+                "name": "parentCollectionId"
+            },
+            {
+                "type": "bytes32",
+                "name": "conditionId"
+            },
+            {
+                "type": "uint256[]",
+                "name": "partition"
+            },
+            {
+                "type": "uint256",
+                "name": "amount"
+            }
+        ],
+        "constant": false
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "payable": false,
+        "outputs": [],
+        "name": "setApprovalForAll",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "operator"
+            },
+            {
+                "type": "bool",
+                "name": "approved"
+            }
+        ],
+        "constant": false
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "payable": false,
+        "outputs": [],
+        "name": "reportPayouts",
+        "inputs": [
+            {
+                "type": "bytes32",
+                "name": "questionId"
+            },
+            {
+                "type": "uint256[]",
+                "name": "payouts"
+            }
+        ],
+        "constant": false
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "payable": false,
+        "outputs": [
+            {
+                "type": "uint256",
+                "name": ""
+            }
+        ],
+        "name": "getOutcomeSlotCount",
+        "inputs": [
+            {
+                "type": "bytes32",
+                "name": "conditionId"
+            }
+        ],
+        "constant": true
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "payable": false,
+        "outputs": [],
+        "name": "prepareCondition",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "oracle"
+            },
+            {
+                "type": "bytes32",
+                "name": "questionId"
+            },
+            {
+                "type": "uint256",
+                "name": "outcomeSlotCount"
+            }
+        ],
+        "constant": false
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "payable": false,
+        "outputs": [
+            {
+                "type": "uint256",
+                "name": ""
+            }
+        ],
+        "name": "payoutDenominator",
+        "inputs": [
+            {
+                "type": "bytes32",
+                "name": ""
+            }
+        ],
+        "constant": true
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "payable": false,
+        "outputs": [
+            {
+                "type": "bool",
+                "name": ""
+            }
+        ],
+        "name": "isApprovedForAll",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "owner"
+            },
+            {
+                "type": "address",
+                "name": "operator"
+            }
+        ],
+        "constant": true
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "payable": false,
+        "outputs": [],
+        "name": "safeTransferFrom",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "from"
+            },
+            {
+                "type": "address",
+                "name": "to"
+            },
+            {
+                "type": "uint256",
+                "name": "id"
+            },
+            {
+                "type": "uint256",
+                "name": "value"
+            },
+            {
+                "type": "bytes",
+                "name": "data"
+            }
+        ],
+        "constant": false
+    },
+    {
+        "type": "event",
+        "name": "ConditionPreparation",
+        "inputs": [
+            {
+                "type": "bytes32",
+                "name": "conditionId",
+                "indexed": true
+            },
+            {
+                "type": "address",
+                "name": "oracle",
+                "indexed": true
+            },
+            {
+                "type": "bytes32",
+                "name": "questionId",
+                "indexed": true
+            },
+            {
+                "type": "uint256",
+                "name": "outcomeSlotCount",
+                "indexed": false
+            }
+        ],
+        "anonymous": false
+    },
+    {
+        "type": "event",
+        "name": "ConditionResolution",
+        "inputs": [
+            {
+                "type": "bytes32",
+                "name": "conditionId",
+                "indexed": true
+            },
+            {
+                "type": "address",
+                "name": "oracle",
+                "indexed": true
+            },
+            {
+                "type": "bytes32",
+                "name": "questionId",
+                "indexed": true
+            },
+            {
+                "type": "uint256",
+                "name": "outcomeSlotCount",
+                "indexed": false
+            },
+            {
+                "type": "uint256[]",
+                "name": "payoutNumerators",
+                "indexed": false
+            }
+        ],
+        "anonymous": false
+    },
+    {
+        "type": "event",
+        "name": "PositionSplit",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "stakeholder",
+                "indexed": true
+            },
+            {
+                "type": "address",
+                "name": "collateralToken",
+                "indexed": false
+            },
+            {
+                "type": "bytes32",
+                "name": "parentCollectionId",
+                "indexed": true
+            },
+            {
+                "type": "bytes32",
+                "name": "conditionId",
+                "indexed": true
+            },
+            {
+                "type": "uint256[]",
+                "name": "partition",
+                "indexed": false
+            },
+            {
+                "type": "uint256",
+                "name": "amount",
+                "indexed": false
+            }
+        ],
+        "anonymous": false
+    },
+    {
+        "type": "event",
+        "name": "PositionsMerge",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "stakeholder",
+                "indexed": true
+            },
+            {
+                "type": "address",
+                "name": "collateralToken",
+                "indexed": false
+            },
+            {
+                "type": "bytes32",
+                "name": "parentCollectionId",
+                "indexed": true
+            },
+            {
+                "type": "bytes32",
+                "name": "conditionId",
+                "indexed": true
+            },
+            {
+                "type": "uint256[]",
+                "name": "partition",
+                "indexed": false
+            },
+            {
+                "type": "uint256",
+                "name": "amount",
+                "indexed": false
+            }
+        ],
+        "anonymous": false
+    },
+    {
+        "type": "event",
+        "name": "PayoutRedemption",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "redeemer",
+                "indexed": true
+            },
+            {
+                "type": "address",
+                "name": "collateralToken",
+                "indexed": true
+            },
+            {
+                "type": "bytes32",
+                "name": "parentCollectionId",
+                "indexed": true
+            },
+            {
+                "type": "bytes32",
+                "name": "conditionId",
+                "indexed": false
+            },
+            {
+                "type": "uint256[]",
+                "name": "indexSets",
+                "indexed": false
+            },
+            {
+                "type": "uint256",
+                "name": "payout",
+                "indexed": false
+            }
+        ],
+        "anonymous": false
+    },
+    {
+        "type": "event",
+        "name": "TransferSingle",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "operator",
+                "indexed": true
+            },
+            {
+                "type": "address",
+                "name": "from",
+                "indexed": true
+            },
+            {
+                "type": "address",
+                "name": "to",
+                "indexed": true
+            },
+            {
+                "type": "uint256",
+                "name": "id",
+                "indexed": false
+            },
+            {
+                "type": "uint256",
+                "name": "value",
+                "indexed": false
+            }
+        ],
+        "anonymous": false
+    },
+    {
+        "type": "event",
+        "name": "TransferBatch",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "operator",
+                "indexed": true
+            },
+            {
+                "type": "address",
+                "name": "from",
+                "indexed": true
+            },
+            {
+                "type": "address",
+                "name": "to",
+                "indexed": true
+            },
+            {
+                "type": "uint256[]",
+                "name": "ids",
+                "indexed": false
+            },
+            {
+                "type": "uint256[]",
+                "name": "values",
+                "indexed": false
+            }
+        ],
+        "anonymous": false
+    },
+    {
+        "type": "event",
+        "name": "ApprovalForAll",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "owner",
+                "indexed": true
+            },
+            {
+                "type": "address",
+                "name": "operator",
+                "indexed": true
+            },
+            {
+                "type": "bool",
+                "name": "approved",
+                "indexed": false
+            }
+        ],
+        "anonymous": false
+    },
+    {
+        "type": "event",
+        "name": "URI",
+        "inputs": [
+            {
+                "type": "string",
+                "name": "value",
+                "indexed": false
+            },
+            {
+                "type": "uint256",
+                "name": "id",
+                "indexed": true
+            }
+        ],
+        "anonymous": false
+    }
+]
