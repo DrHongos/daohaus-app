@@ -1,6 +1,6 @@
 import { graphQuery } from '../utils/apollo';
-import React, { useEffect, useRef, useState } from 'react';
-import { Spinner, HStack } from '@chakra-ui/react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
+import { Spinner, HStack, Spacer } from '@chakra-ui/react';
 import bs58 from 'bs58';
 import { gql } from 'apollo-boost';
 import GenericInput from './genericInput';
@@ -11,11 +11,13 @@ import { useInjectedProvider } from '../contexts/InjectedProviderContext';
 
 // TODO:
 // calculate proportional of the values introduced
+// validation
 
 const ConditionSplitting = props => {
   const { name, localForm } = props;
   const [ipfsHash, setIpfsHash] = useState(null);
   const [conditions, setConditions] = useState(null);
+  const [payoutArray, setPayoutArray] = useState();
   const conditionsFetch = useRef(false);
   const [loadingIpfs, setLoadingIpfs] = useState(false);
   const [conditionData, setConditionData] = useState(null);
@@ -141,6 +143,29 @@ const ConditionSplitting = props => {
     return ipfsHash;
   };
 
+  const proportions = useMemo(() => {
+    const results = props.values.payout.map(x => parseInt(x));
+    if (results?.length) {
+      const total = results.reduce((p, a) => p + a, 0);
+      console.log(`total ${total}`);
+      const proportionals = results.map(x => x / total);
+      console.log(`proportionals ${proportionals}`);
+      return proportionals;
+    } else return [33, 33, 33];
+  }, [props.values.payout]);
+
+  const { setValue } = localForm;
+
+  useEffect(() => {
+    if (!props.values.payout) {
+      const defaultPayout = proportions;
+      setPayoutArray(proportions);
+      setValue('payout', proportions);
+    }
+  }, []);
+
+  //disabled={!validate.address(props.values.oracle)}
+
   return (
     <>
       <GenericSelect
@@ -183,17 +208,17 @@ const ConditionSplitting = props => {
           {conditionData?.outcomes?.length ? (
             <>
               <h3>{conditionData.condition}</h3>
-              {conditionData.outcomes.map((x, i) => {
+              {payoutArray.map((x, i) => {
                 return (
                   <HStack key={i}>
                     <GenericInput
                       {...props}
                       key={x}
-                      label={`${x}`}
-                      placeholder={`33%`}
+                      label={`${conditionData.outcomes[x]}`}
                       name={`payout.${i.toString()}`}
                     />
-                    <>XXX %</>
+                    <Spacer />
+                    <>{Math.round(proportions[i] * 100, 2)} %</>
                   </HStack>
                 );
               })}
