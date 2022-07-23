@@ -13,49 +13,50 @@ export const CONDITIONAL_TOKENS_FORMS = {
     dev: true,
     logValues: true,
     tx: TX.CREATE_CONDITION,
-    required: ['condition', 'oracle', 'conditionResults'],
+    required: ['questionId', 'selectedMinion'],
     fields: [
       [
-        [FIELD.TITLE, FIELD.MINION_SELECT],
+        FIELD.TITLE,
+        FIELD.DESCRIPTION,
+        FIELD.MINION_SELECT,
         {
-          type: 'input',
-          label: 'Condition',
-          name: 'condition',
-          htmlFor: 'condition',
-          placeholder: 'Condition name',
-          expectType: 'any',
+          ...FIELD.DATE_RANGE,
+          info: 'This limits are just informative',
+          label: 'Estimated date for definition',
+          name: 'estimatedDefinition',
         },
+      ],
+      [
         {
           type: 'input',
-          label: 'Condition Description',
-          name: 'conditionDescription',
-          htmlFor: 'conditionDescription',
-          placeholder: 'Condition description',
-          expectType: 'any',
-        },
-        {
-          type: 'input',
-          label: 'Oracle',
-          name: 'oracle',
-          htmlFor: 'oracle',
-          placeholder: 'Setter of condition result',
-          expectType: 'address',
-        },
-        {
-          type: 'input',
-          label: 'Number of results',
-          name: 'conditionResults',
-          htmlFor: 'conditionResults',
-          placeholder: 'Possible results',
+          label: 'Possible Outcomes',
+          info:
+            'Possible amount of outcomes, should represent ALL possible results',
+          name: 'conditionOutcomes',
+          htmlFor: 'conditionOutcomes',
+          placeholder: '2',
           expectType: 'number',
+        },
+        {
+          type: 'conditionDefinitionForm',
+          name: 'questionId',
+          label: 'Condition Manifesto',
+          htmlFor: 'questionId',
+          expectType: 'any',
         },
       ],
     ],
   },
+  // TODO
+  // validate conditionId?
+  // getOutcomeSlotCount(bytes32 conditionId)returns (uint)
+  // validate array (present in a visual way: https://cte.gnosis.ioc)
+  // change it to CREATE_POSITION (from collateral) and later SPLIT for deeper ct's
   SPLIT_POSITION: {
     id: 'SPLIT_POSITION',
-    title: 'Fund conditional tokens',
-    description: 'Mints the conditional tokens backed up by collateral',
+    title: 'Fund and mint conditional tokens',
+    description:
+      'Approves collateral & Mints the conditional tokens backed up by collateral',
     type: PROPOSAL_TYPES.SPLIT_POSITION,
     minionType: MINION_TYPES.SAFE,
     dev: true,
@@ -70,7 +71,11 @@ export const CONDITIONAL_TOKENS_FORMS = {
     ],
     fields: [
       [
-        [FIELD.TITLE, FIELD.MINION_SELECT, FIELD.MINION_PAYMENT],
+        [
+          FIELD.TITLE,
+          FIELD.MINION_SELECT,
+          { ...FIELD.MINION_PAYMENT, label: 'Funds to split' },
+        ],
         {
           type: 'input',
           label: 'Condition ID',
@@ -79,55 +84,212 @@ export const CONDITIONAL_TOKENS_FORMS = {
           placeholder: 'conditionId',
           expectType: 'any', // should check (?)
         },
-        // TODO
-        // im getting fucked to convert a string to an array
-        // anyway.. the correct method is reading the arguments
-        // getOutcomeSlotCount(bytes32 conditionId)
-        // and setting an input for each
-        // then create an array
         {
           type: 'input',
           label: 'Distribution',
+          info:
+            'Comma separated values representing bit arrays of possible results',
           name: 'distribution',
           htmlFor: 'distribution',
-          placeholder:
-            'comma separated relation of initial distribution for each response',
-          expectType: 'arrayOfNumbers', // check for arrays
+          placeholder: 'comma separated responses index as in bit array',
+          expectType: 'any', // check for arrays
           modifiers: ['convertToArray'],
         },
       ],
     ],
-    REPORT_PAYOUTS: {
-      id: 'REPORT_PAYOUTS',
-      title: 'Resolve a condition',
-      description: 'Sets the payout array for a condition',
-      type: PROPOSAL_TYPES.REPORT_PAYOUTS,
-      minionType: MINION_TYPES.SAFE,
-      dev: true,
-      logValues: true,
-      tx: null, //TX.REPORT_PAYOUTS,
-      required: ['conditionId', 'selectedMinion', 'distribution'],
-      fields: [
+  },
+  SPLIT_POSITION_DEEP: {
+    id: 'SPLIT_POSITION_DEEP',
+    title: 'Split conditional tokens into other positions',
+    description:
+      'Mints conditional tokens backed up by other valid conditionals',
+    type: PROPOSAL_TYPES.SPLIT_POSITION_DEEP,
+    minionType: MINION_TYPES.SAFE,
+    dev: true,
+    logValues: true,
+    tx: TX.SPLIT_POSITION_DEEP,
+    required: ['parentCollectionId', 'conditionId', 'distribution'],
+    fields: [
+      [FIELD.TITLE, FIELD.DESCRIPTION, FIELD.MINION_SELECT],
+      [
+        {
+          type: 'input',
+          label: 'Collateral Address',
+          name: 'collateralAddress',
+          htmlFor: 'collateralAddress',
+          placeholder: '0x',
+          expectType: 'address', // should check (?)
+        },
+        {
+          type: 'input',
+          label: 'Amount of tokens to split',
+          name: 'amountToSplit',
+          htmlFor: 'amountToSplit',
+          placeholder: 'Amount of tokens',
+          expectType: 'number', // should check (?)
+        },
+        {
+          type: 'input',
+          label: 'Parent Collection ID',
+          name: 'parentCollectionId',
+          htmlFor: 'parentCollectionId',
+          placeholder: 'parentCollectionId',
+          expectType: 'any', // should check (?)
+        },
+        {
+          type: 'input',
+          label: 'Condition ID',
+          name: 'conditionId',
+          htmlFor: 'conditionId',
+          placeholder: 'conditionId',
+          expectType: 'any', // should check (?)
+        },
+        {
+          type: 'input',
+          label: 'Distribution',
+          info:
+            'Comma separated values representing bit arrays of possible results',
+          name: 'distribution',
+          htmlFor: 'distribution',
+          placeholder: 'comma separated responses index as in bit array',
+          expectType: 'any', // check for arrays
+          modifiers: ['convertToArray'],
+        },
+      ],
+    ],
+  },
+  REPORT_PAYOUTS: {
+    id: 'REPORT_PAYOUTS',
+    title: 'Resolve a condition',
+    description: 'Sets the payout array for a condition',
+    type: PROPOSAL_TYPES.REPORT_PAYOUTS,
+    minionType: MINION_TYPES.SAFE,
+    dev: true,
+    logValues: true,
+    tx: TX.REPORT_PAYOUTS,
+    required: ['questionId', 'selectedMinion', 'payouts'],
+    fields: [
+      [FIELD.TITLE, FIELD.DESCRIPTION, FIELD.MINION_SELECT],
+      [
+        {
+          type: 'conditionSplitting',
+          label: 'Condition',
+          name: 'response',
+          htmlFor: 'response',
+          placeholder: 'response',
+        },
+      ],
+    ],
+  },
+  TRANSFER_CONDITIONAL: {
+    id: 'TRANSFER_CONDITIONAL',
+    title: 'Transfer conditional tokens',
+    description: 'Currently only safeBatchTransfer (add form condition)',
+    type: PROPOSAL_TYPES.TRANSFER_CONDITIONAL,
+    minionType: MINION_TYPES.SAFE,
+    dev: true,
+    logValues: true,
+    tx: TX.TRANSFER_CONDITIONAL,
+    required: ['beneficiary', 'tokenIds', 'amounts'],
+    fields: [
+      [
+        [FIELD.TITLE, FIELD.MINION_SELECT],
+        {
+          type: 'input',
+          label: 'To',
+          name: 'beneficiary',
+          htmlFor: 'beneficiary',
+          placeholder: 'Beneficiary address',
+          expectType: 'address',
+        },
+        {
+          type: 'contributorRewardListInput', // improve
+          label: 'Ids',
+          info: 'Comma separated ids of the positions',
+          name: 'tokenIds',
+          htmlFor: 'tokenIds',
+          placeholder: 'xx,yy,',
+          expectType: 'any', // check for arrays
+          modifiers: ['convertToArray'],
+        },
+        {
+          type: 'input',
+          label: 'Amounts',
+          info: 'Comma separated amounts for each subId',
+          name: 'amounts',
+          htmlFor: 'amounts',
+          placeholder: 'xx,yy,',
+          expectType: 'any', // check for arrays
+          modifiers: ['convertToArray'],
+        },
+      ],
+    ],
+  },
+  /* BURN_CONDITIONALS: {
+    id: 'BURN_CONDITIONALS',
+    title: 'Burn conditional tokens in minion possesion - WIP',
+    description:
+      'Use (after distribution) it to unrelate the minion position in the game',
+    type: PROPOSAL_TYPES.BURN_CONDITIONALS,
+    minionType: MINION_TYPES.SAFE,
+    dev: true,
+    logValues: true,
+    tx: TX.BURN_CONDITIONALS,
+    required: ['tokenIds'],
+    fields: [
+      [
+        [FIELD.TITLE, FIELD.MINION_SELECT],
+        {
+          type: 'contributorRewardListInput', // improve
+          label: 'Ids',
+          info: 'Comma separated ids of the positions',
+          name: 'tokenIds',
+          htmlFor: 'tokenIds',
+          placeholder: 'xx,yy,',
+          expectType: 'any', // check for arrays
+          modifiers: ['convertToArray'],
+        },
+      ],
+    ],
+  }, */
+  /*SOLVE_BET: {
+    id: 'SOLVE_BET',
+    title: 'Solve a bet for groups of users WIP',
+    description:
+      'Distribute conditional tokens to users collateralized with an ERC20',
+    type: PROPOSAL_TYPES.SOLVE_BET,
+    minionType: MINION_TYPES.SAFE,
+    dev: true,
+    logValues: true,
+    tx: null, // TX.SOLVE_BET,
+    required: [],
+    fields: [
+      [
         [
-          [FIELD.TITLE, FIELD.MINION_SELECT],
+          FIELD.TITLE,
+          FIELD.MINION_SELECT,
+          { ...FIELD.MINION_PAYMENT, label: 'Funds to split' },
           {
             type: 'input',
-            label: 'Condition ID',
-            name: 'conditionId',
-            htmlFor: 'conditionId',
-            placeholder: 'conditionId',
-            expectType: 'any', // should check (?)
+            label: 'Oracle',
+            name: 'oracle',
+            htmlFor: 'oracle',
+            placeholder: 'Setter of condition result',
+            expectType: 'address',
           },
           {
             type: 'input',
-            label: 'Distribution',
-            name: 'distribution',
-            htmlFor: 'distribution',
-            placeholder: 'Distribution array',
-            expectType: 'any', // check for arrays (or a better form obj)
+            label: 'Number of results',
+            info:
+              'Number of possible outcomes (not to be confused with collections)',
+            name: 'conditionResults',
+            htmlFor: 'conditionResults',
+            placeholder: 'Possible results',
+            expectType: 'number',
           },
         ],
       ],
-    },
-  },
+      [FIELD.DISPERSE_CSV],
+    ],
+  }, */
 };

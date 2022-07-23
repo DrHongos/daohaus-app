@@ -56,6 +56,8 @@ import PosterEncoder from './posterEncoder';
 import DocSelect from './docSelect';
 import WalletConnectTx from './walletConnectTx';
 import ContributorRewardListInput from './contributorRewardListInput';
+import ConditionSplitting from './conditionSplitting';
+import ConditionDefinitionForm from './conditionDefinitionForm';
 
 export const InputFactory = props => {
   const { type, formCondition, required } = props;
@@ -237,6 +239,12 @@ export const InputFactory = props => {
   }
   if (type === 'contributorRewardListInput') {
     return <ContributorRewardListInput {...props} />;
+  }
+  if (type === 'conditionDefinitionForm') {
+    return <ConditionDefinitionForm {...props} />;
+  }
+  if (type === 'conditionSplitting') {
+    return <ConditionSplitting {...props} />;
   }
   return null;
 };

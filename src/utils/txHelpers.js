@@ -1,5 +1,6 @@
 import { encodeMultiSend } from '@gnosis.pm/safe-contracts';
 import Web3 from 'web3';
+import bs58 from 'bs58';
 
 import { detailsToJSON, filterObject, HASH } from './general';
 import { getContractBalance, valToDecimalString } from './tokenValue';
@@ -427,6 +428,7 @@ const gatherArgs = async data => {
         }
         return [...vals].flatMap(v => v);
       }
+      // TODO: send to fieldComponent
       if (arg.type === 'toArray') {
         const vals = await Promise.all(
           arg.gatherArgs.map(async a => {
@@ -436,9 +438,12 @@ const gatherArgs = async data => {
             });
           }),
         );
-        const items = vals.toString().split(',');
-        const corrected = items.map(x => parseInt(x));
-        console.log(`passes ${corrected}`);
+        const corrected = vals
+          .toString()
+          .split(',')
+          .map(x => x.trim());
+        /* const corrected = items.map(x => parseInt(x)); */
+        console.log(`parsed ${corrected}`);
         return corrected;
       }
       //  for convenience, will search the values object for a field with the given string.

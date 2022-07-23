@@ -64,6 +64,9 @@ export const PROPOSAL_TYPES = {
   CREATE_CONDITION: 'Create conditional tokens',
   SPLIT_POSITION: 'Fund and mint conditional tokens',
   REPORT_PAYOUTS: 'Report results of a condition',
+  TRANSFER_CONDITIONAL: 'Transfers conditional tokens',
+  BURN_CONDITIONALS: 'Burns minion balance of conditional tokens',
+  SPLIT_POSITION_DEEP: 'Split conditional tokens into a deeper position',
 };
 
 export const MINION_TYPES = {

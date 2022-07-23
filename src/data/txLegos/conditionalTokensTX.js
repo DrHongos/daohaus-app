@@ -3,12 +3,22 @@ import { CONTRACTS } from '../contracts';
 import { DETAILS } from '../details';
 
 // TODO
-//questionId (now hardcoded and possibly giving troubles for overriding conditionIds)
-// what about DAOHAUS and IPFS?
-// there's a util with a pinning ;)
-// ipfsJsonPin in './metadata'
-//this needs to be calculated (and saves up the rest of the data)
-// test this https://ethereum.stackexchange.com/questions/23058/how-to-convert-string-to-bytes32-in-web3js
+// pre calculate conditionId
+/*const conditionId = web3.utils.soliditySha3(
+  {
+    t: 'address',
+    v: '.values.oracle',
+  },
+  {
+    t: 'bytes32',
+    v: pinataData.hash, //?
+  },
+  {
+    t: 'uint',
+    v: '.values.responses',
+  },
+);
+console.log(`conditionId ${conditionId}`); */
 
 export const CONDITIONAL_TOKENS_TX = {
   CREATE_CONDITION: buildMultiTxAction({
@@ -17,20 +27,27 @@ export const CONDITIONAL_TOKENS_TX = {
         targetContract: '.contextData.chainConfig.conditional_tokens_addr',
         abi: CONTRACTS.CONDITIONAL_TOKENS,
         fnName: 'prepareCondition',
+        logTx: true,
         args: [
           '.values.oracle',
-          '0x3168af70a7b82d713173900140104e7c428c6826fd90e99cc071d858ac73357d', //"questionId"
-          '.values.conditionResults',
+          '.values.questionId',
+          '.values.conditionOutcomes',
         ],
       },
     ],
     detailsToJson: DETAILS.CONDITIONAL,
   }),
-  // TODO
-  // validate array (present in a visual way: https://cte.gnosis.ioc)
-  // validate conditionId?
   CREATE_POSITION: buildMultiTxAction({
     actions: [
+      {
+        targetContract: '.values.minionToken',
+        abi: CONTRACTS.ERC_20,
+        fnName: 'approve',
+        args: [
+          '.contextData.chainConfig.conditional_tokens_addr',
+          '.values.minionPayment',
+        ],
+      },
       {
         targetContract: '.contextData.chainConfig.conditional_tokens_addr',
         abi: CONTRACTS.CONDITIONAL_TOKENS,
@@ -45,6 +62,105 @@ export const CONDITIONAL_TOKENS_TX = {
           },
           '.values.minionPayment',
         ],
+      },
+    ],
+    detailsToJson: DETAILS.CONDITIONAL,
+  }),
+  TRANSFER_CONDITIONAL: buildMultiTxAction({
+    actions: [
+      {
+        targetContract: '.contextData.chainConfig.conditional_tokens_addr',
+        abi: CONTRACTS.CONDITIONAL_TOKENS,
+        fnName: 'safeBatchTransferFrom',
+        args: [
+          '.values.selectedSafeAddress',
+          '.values.beneficiary',
+          {
+            type: 'toArray',
+            gatherArgs: ['.values.tokenIds'],
+          },
+          {
+            type: 'toArray',
+            gatherArgs: ['.values.amounts'],
+          },
+          '0x',
+        ],
+      },
+    ],
+    detailsToJson: DETAILS.CONDITIONAL,
+  }),
+  // oh oh! we DONT have burning capabilitiesss
+  BURN_CONDITIONALS: buildMultiTxAction({
+    actions: [
+      {
+        targetContract: '.contextData.chainConfig.conditional_tokens_addr',
+        abi: CONTRACTS.CONDITIONAL_TOKENS,
+        fnName: 'safeBatchTransferFrom',
+        args: [
+          '.values.selectedSafeAddress',
+          '.values.beneficiary',
+          {
+            type: 'toArray',
+            gatherArgs: ['.values.tokenIds'],
+          },
+          {
+            type: 'toArray',
+            gatherArgs: ['.values.amounts'],
+          },
+          '0x',
+        ],
+      },
+    ],
+    detailsToJson: DETAILS.CONDITIONAL,
+  }),
+  SPLIT_POSITION: buildMultiTxAction({
+    actions: [
+      {
+        targetContract: '.contextData.chainConfig.conditional_tokens_addr',
+        abi: CONTRACTS.CONDITIONAL_TOKENS,
+        fnName: 'splitPosition',
+        args: [
+          '.values.minionToken',
+          '.values.parentCollectionId',
+          '.values.conditionId',
+          {
+            type: 'toArray',
+            gatherArgs: ['.values.distribution'],
+          },
+          '.values.minionPayment',
+        ],
+      },
+    ],
+    detailsToJson: DETAILS.CONDITIONAL,
+  }),
+  SPLIT_POSITION_DEEP: buildMultiTxAction({
+    actions: [
+      {
+        targetContract: '.contextData.chainConfig.conditional_tokens_addr',
+        abi: CONTRACTS.CONDITIONAL_TOKENS,
+        fnName: 'splitPosition',
+        args: [
+          '.values.collateralAddress',
+          '.values.parentCollectionId',
+          '.values.conditionId',
+          {
+            type: 'toArray',
+            gatherArgs: ['.values.distribution'],
+          },
+          '.values.amountToSplit',
+        ],
+      },
+    ],
+    detailsToJson: DETAILS.CONDITIONAL,
+  }),
+  REPORT_PAYOUTS: buildMultiTxAction({
+    actions: [
+      {
+        targetContract: '.contextData.chainConfig.conditional_tokens_addr',
+        abi: CONTRACTS.CONDITIONAL_TOKENS,
+        fnName: 'reportPayouts',
+        logTx: true,
+        args: ['.values.questionId', '.values.payout'],
       },
     ],
     detailsToJson: DETAILS.CONDITIONAL,
