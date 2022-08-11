@@ -224,4 +224,9 @@ export const CONTRACTS = {
     abiName: 'CONDITIONAL_TOKENS',
     contractAddress: '.contextData.chainConfig.conditional_tokens_addr',
   },
+  CONDITIONAL_TOKENS_DISTRIBUTOR: {
+    location: 'local',
+    abiName: 'CONDITIONAL_TOKENS_DISTRIBUTOR',
+    contractAddress: '.contextData.chainConfig.conditional_tokens_distributor',
+  },
 };

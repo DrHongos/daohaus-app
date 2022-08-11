@@ -391,6 +391,8 @@ export const supportedChains = {
     hedgey_batch_mint_addr: '0x4Bc8Ea84bdC3EBB01D495e5D1605d4F082aEb5d7',
     dao_conditional_helper_addr: '0x55c8F8a71aD01FC707Bbb1A04d2c0Ef246973392',
     conditional_tokens_addr: '0xCeAfDD6bc0bEF976fdCd1112955828E00543c0Ce',
+    conditional_tokens_distributor:
+      '0x255c6f95ce1e582e04243900498d207fd39003f0',
     zodiac_amb_module: {
       amb_bridge_address: {
         '0x1': '0x4C36d2919e407f0Cc2Ee3c993ccF8ac26d9CE64e',

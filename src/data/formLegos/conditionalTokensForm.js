@@ -47,6 +47,68 @@ export const CONDITIONAL_TOKENS_FORMS = {
       ],
     ],
   },
+  CREATE_DISTRIBUTION_CTS: {
+    id: 'CREATE_DISTRIBUTION_CTS',
+    title: 'Fund and create a distribution of conditional tokens',
+    description: 'Approves collateral & initializes a distribution contract',
+    type: PROPOSAL_TYPES.CREATE_DISTRIBUTION_CTS,
+    minionType: MINION_TYPES.SAFE,
+    dev: true,
+    logValues: true,
+    tx: TX.CREATE_DISTRIBUTION_CTS,
+    required: [
+      'selectedMinion',
+      'conditionId',
+      'distribution',
+      'distributionAddress',
+    ],
+    fields: [
+      [
+        FIELD.TITLE,
+        FIELD.MINION_SELECT,
+        { ...FIELD.MINION_PAYMENT, label: 'Funds to split' },
+      ],
+      [
+        {
+          type: 'input',
+          label: 'Distributor address',
+          name: 'distributionAddress',
+          info:
+            'Currently must be done externally and only for shallow collections',
+          htmlFor: 'distributionAddress',
+          placeholder: 'distributionAddress',
+          expectType: 'address', // could check if in factory
+        },
+        {
+          type: 'dateSelect',
+          label: 'TIMELIMIT',
+          info:
+            'Time where positioning is stopped, can be cancelled with value = 0',
+          name: 'timeout',
+          htmlFor: 'timeout',
+          placeholder: 'timeout',
+          expectType: 'any', // should check is not resolved
+        },
+        {
+          type: 'input',
+          label: 'Condition ID',
+          info: 'Condition created by prepareCondition',
+          name: 'conditionId',
+          htmlFor: 'conditionId',
+          placeholder: 'conditionId',
+          expectType: 'any', // should check is not resolved
+        },
+        {
+          type: 'collectionSplitting',
+          label: 'Distribution',
+          info: 'Disjoint groups to create collections',
+          name: 'distribution',
+          htmlFor: 'distribution',
+          expectType: 'any',
+        },
+      ],
+    ],
+  },
   // TODO
   // validate conditionId?
   // getOutcomeSlotCount(bytes32 conditionId)returns (uint)

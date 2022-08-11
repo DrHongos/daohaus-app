@@ -58,6 +58,7 @@ import WalletConnectTx from './walletConnectTx';
 import ContributorRewardListInput from './contributorRewardListInput';
 import ConditionSplitting from './conditionSplitting';
 import ConditionDefinitionForm from './conditionDefinitionForm';
+import CollectionSplitting from './collectionSplitting';
 
 export const InputFactory = props => {
   const { type, formCondition, required } = props;
@@ -245,6 +246,9 @@ export const InputFactory = props => {
   }
   if (type === 'conditionSplitting') {
     return <ConditionSplitting {...props} />;
+  }
+  if (type === 'collectionSplitting') {
+    return <CollectionSplitting {...props} />;
   }
   return null;
 };

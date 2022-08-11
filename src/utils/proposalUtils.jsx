@@ -67,6 +67,8 @@ export const PROPOSAL_TYPES = {
   TRANSFER_CONDITIONAL: 'Transfers conditional tokens',
   BURN_CONDITIONALS: 'Burns minion balance of conditional tokens',
   SPLIT_POSITION_DEEP: 'Split conditional tokens into a deeper position',
+  CREATE_DISTRIBUTION_CTS:
+    'Create a distribution system for conditional tokens',
 };
 
 export const MINION_TYPES = {

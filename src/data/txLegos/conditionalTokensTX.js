@@ -66,6 +66,31 @@ export const CONDITIONAL_TOKENS_TX = {
     ],
     detailsToJson: DETAILS.CONDITIONAL,
   }),
+  CREATE_DISTRIBUTION_CTS: buildMultiTxAction({
+    actions: [
+      {
+        targetContract: '.values.minionToken',
+        abi: CONTRACTS.ERC_20,
+        fnName: 'transfer',
+        args: ['.values.distributionAddress', '.values.minionPayment'],
+      },
+      {
+        targetContract: '.values.distributionAddress',
+        abi: CONTRACTS.CONDITIONAL_TOKENS_DISTRIBUTOR,
+        fnName: 'initialize',
+        args: [
+          '.values.conditionId',
+          '0x0000000000000000000000000000000000000000000000000000000000000000',
+          '.values.minionToken',
+          '.contextData.chainConfig.conditional_tokens_addr',
+          '.values.distribution',
+          '.values.minionPayment',
+          '.values.timeout',
+        ],
+      },
+    ],
+    detailsToJson: DETAILS.CONDITIONAL,
+  }),
   TRANSFER_CONDITIONAL: buildMultiTxAction({
     actions: [
       {

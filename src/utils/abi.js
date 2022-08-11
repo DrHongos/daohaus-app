@@ -45,6 +45,8 @@ import MOLOCH_TOKEN_FACTORY from '../contracts/molochTokenFactory.json';
 import SBT_FACTORY from '../contracts/sbtFactory.json';
 import HEDGEY_BATCH_MINT from '../contracts/hedgeyBatchMint.json';
 import CONDITIONAL_TOKENS from '../contracts/conditionalToken.json';
+import CONDITIONAL_TOKENS_DISTRIBUTOR from '../contracts/conditional_tokens_distributor.json';
+
 import { validate } from './validation';
 
 import { cacheABI, getCachedABI } from './localForage';
@@ -86,6 +88,7 @@ export const LOCAL_ABI = Object.freeze({
   SBT_FACTORY,
   HEDGEY_BATCH_MINT,
   CONDITIONAL_TOKENS,
+  CONDITIONAL_TOKENS_DISTRIBUTOR,
 });
 
 const getBlockExplorerApiKey = chainID => {

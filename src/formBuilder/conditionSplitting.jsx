@@ -10,7 +10,6 @@ import { getIPFSPinata } from '../utils/metadata';
 import { useInjectedProvider } from '../contexts/InjectedProviderContext';
 
 // TODO:
-// calculate proportional of the values introduced
 // validation
 
 const ConditionSplitting = props => {
@@ -144,7 +143,7 @@ const ConditionSplitting = props => {
   };
 
   const proportions = useMemo(() => {
-    const results = props.values.payout.map(x => parseInt(x));
+    const results = props.values?.payout?.map(x => parseInt(x));
     if (results?.length) {
       const total = results.reduce((p, a) => p + a, 0);
       console.log(`total ${total}`);

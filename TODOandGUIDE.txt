@@ -1,0 +1,192 @@
+// NEXT:
+- deploy simpleDistributor and factory on gnosis chain
+simpleDistributor: 0x254e80523cdd5327bd75e517cb0635146b8ee0f5
+simpleDistributorFactory: 0x4b05b21a6b6f12decc260d70f15af2b4b10b0169
+ISimpleDistributor: 0xf20cea1da3cd65a017d1c0551b8f3c4e7c69334d
+- create subgraph (update ABI's & addresses)
+
+- create simple dApp to interact with (enter positions and redeem)
+    - Create User context (read user data)
+    - Create Prediction context (read all data)
+    - Create functions to interact with prediction
+    - Subgraqph should read IPFS and store manifesto data
+- Create boost function to operate the distributor
+    - Change stages (maybe multiTx w/reportPayout)
+- add tools https://observablehq.com/@d3/parallel-sets (combinatorials)
+- Ask about pushing Omen
+- Or create new models of distribution/market
+
+CUSTOM FIELDS:
+form -> inputFactory -> f(type) -> component
+
+--- FIELDS TODO:
+    ---> implement distribution contract
+
+    - conditionSplitting -> select combinations of possible outcomes 
+        - should add an number input (non equal proportional distribution)
+    - Transfer conditional tokens:
+        - select a minion should check balances (cte API)
+        - select position ID
+        - input balance (or MAX)
+    - Split/Create Conditionals        
+        - select a minion should check balances (cte API)
+        - select parentCollection
+            - root checkbox
+            - or select from balanece of conditional tokens
+        - select condition ID
+        - input balance (or MAX)
+        - conditionSplitting
+
+TOFIX:
+- custom fields:
+    Loading states
+    getting API data
+    Showing options
+
+TOSTUDY:
+- custom fields
+    - 3rd party API calls
+    - Check on-chain values and display (conditional fields)
+    - 
+
+- Proposal transfers - proposalData.js - proposalTx -- customTransferUI
+    - group of components for the proposal Tx UI 
+
+
+ERROR: Cannot split Collections from Condition 4 into Condition 3..
+idk why
+Creating Condition 6 to test further
+- AND FOUNDRY ENV FOR TEST AND DEVELOPMENT!
+
+
+minion: 0x4f060041c0c18c44223b3c837399542bfe254f0f
+example distribution
+Condition 3
+condition: 0xdd243152d0d0f981a023cfd2c1d46c03f95aea56a431a808c0376e927bd54da0
+ids:
+A: 51509851497372489689888431268051360047313863764906020882512863902519077754029,
+B: 108500281093530042536055177711353772897441756439466225906679616270154445049268,
+C: 23507642164980152651529844589921874068242080045838981668134790065371068269893
+collectionIds:
+A: 0x60365d1fda05769e28c6322db96b95b12816a90be3dd62f28941496ff70dcebc,
+B: 0x557fae74f3fea79c53f089713c66471bd9610c103ed31f53dc888bf36c3dec22,
+C: 0x5e7f5a363a4bc7047ec1c0bb6c808aa39b25fc9662ab65380f7331cf2dfe4654
+
+
+users:
+0x755d6aC49b8B5cDe1bA13588f65808144d7EdcC7 [70, 0, 30]
+0x0ebdF68ea31cECFd048F819b2a59A7bbE3894B82 [0, 90, 10]
+0x7932810A66FEdc6c72a2578Fc83F44521832DEC2 [30, 20, 50]
+
+Condition 4
+condition: 0x3d2ee68eada49ef10604c1058431867cbc76346a9c4461901fcadb5dd8d46300
+Y: 50731870739326864616093400795493143782885299828618693277159660463034824713728  
+N: 68591782575231164615904723293726381161413417511598694766232558589022176311170
+collectionsIds:
+Y: 0x038ee039e6f96dfa95b4dd2c8336a40a66fcfb1fb7fa5f4e3497e10909ffe3c0
+N: 0x5c5b4ccd64951f3a33d720f6b8c0ddbdddd45545fadfb2164a588b3efdc21483
+
+deeper level position Ids:
+AY: 90035761194961148252606195452414837208675607512144241019585141028033517703818
+AN: 94002338294301385986628252136571631457878858911340348624302710096055561960230
+BY: 78802134688352370792819801481160122974792729252995856875724669794268793541088
+BN: 26343255404072654340681849925380564829848830916235698635313840699243222543142
+CY: 59623082483332015187429844660427182559146266942105894477893871618381546542435
+CN: 41305015608002353244575151615380553348387808082400591563319626004598782876137
+collectionsIds
+AY: 0x6708037d4c0225eda5bafe61da3e579297c3b75d0ecf61241205070fadf03833
+AN: 0x5716b1272353d9ad8f152c3a6efbffa191c68d11bf03bd079b55e0b60c95dfd9
+BY: 0x56d95300aea62a1e49ec588aa95d1e3265f6867e0f33974dd00660bfc893c2d4
+BN: 0x6508e5010e85b58f9843720ac5f1df5a780889d363a2f02c87c8d6e403e30fdd
+CY: 0x41d806060fb483893343588d4ec948133c3cf1b670cbb2df00a3d9fb13ac338c
+CN: 0x04a22ed61f8e2216497e1564f991b46775f39b9a492ba955f1ecf60f02e81d57
+
+Condition 6
+0xcd6b609b5b56767abb3f85d52c817a98c73d39ee34d90a00d7ae258eda3dfb5c
+YES: 14751142175083214300076742151058001276383272262439477991974559275015677041032  
+NO: 62488166781497116332438690825635865507583989282321074610948666450952640380443
+collectionIds
+YES:
+NO: 
+
+To check:
+- Create BURN_POSITION for burn the minion balances
+- Create SPLIT_POSITION form & tx, differentiate from CREATE_POSITION
+- Decode and fetch questionId, big bonus on data
+
+- FormBuilder/ has the field components!
+    - decode and fetch questionId
+    - create one for: setConditionId (SPLIT_POSITION)
+        - checks for outcomeSlotCount
+        - dynamic UI allows to name the results
+        - dynamic UI allows allocation of non equal initial distribution
+        - allows establish groups (distributions) for splits
+        - checks balances        
+    - create one for: setQuestionId
+        - decodes JSON? -> link to ipfs JSON
+        - checks for conditionId
+        - allows selection of result
+    - create one for: selectConditionId ???
+        - get subgraph of cte-gnosis
+        - filter for oracle (if its minion)
+    - Create condition: create a checkbox for: minion as oracle (safeAddress)
+    - selectMinion field should check for oracled conditionals created
+
+- is gatherArgs the place to process prev tx args?
+
+- create "BET" function
+    - Sets oracle
+    - Sets number of responses
+    - Splits positions (funding mechanisms to be studied)
+    - Sends proportional amounts to lists of addresses for each position
+        - safeBatchTransfer(from, to, ids[], amounts[], data);
+    - burns the rest of the tokens
+
+- create "CLUE" game contract
+    - Sets conditionals for: Character, Weapon & Place
+    - Splits positions in all levels
+    - Creates a proxy "game contract" to store the predictions
+    -- User Mechanism
+       live ("stake" f(time))
+        - GC allows to change the predictions and accrue a different position token
+       discrete
+        - prediction allow distribution among positions
+        ie: You're entitled to receive 10 tokens/day
+            you choose everyday your ration 
+        (probability distribution of each user)
+
+TODO:
+if conditionId exists:
+read function getOutcomeSlotCount(bytes32 conditionId) returns (uint)
+---
+listen to event ConditionPreparation(bytes32 indexed conditionId, address indexed oracle, bytes32 indexed questionId, uint outcomeSlotCount)
+---
+scalar and categorical examples (splitting and reporting forms)
+---
+Nor daoHaus, nor Safe, nor daoBooks checks for ERC1155. Need to display some other way.
+---
+Uneven initial distributions (copy gnosis FPMM)
+--- 
+Automated complex positions splitting (deeper levels)
+---
+
+---
+DAO Cassandra:
+- Rasputin
+safe address: 
+operator address:
+
+TESTS ---------------------------------------------------------------
+questionId: 0xc696988d21f1ffcb233e310aeaaf2533e320e320375948fc245cd49504459d4f
+oracle: 0x48030a25dfad5441f14f9d5335c5e9da65ac9007
+conditionId: 0x1ab99fdf9b500fe9ba8be71a75e5250ccdc57326cbe1f49c1ac9794aa5e245bd
+outcomeSlotCount: 2
+---
+collateral: 0.1 wxdai
+ids: [
+    72661688566621955339251958944914013188164777377791869895412531933198924468134,
+    72985375655502834392708164387709541916897109533308667674879137252122825951531
+    ]
+---
+reportPayout: [1, 0]
+and redeemed through the cte-gnosis... AWESOME!
